@@ -73,7 +73,6 @@ for qr_id in qr_ids:
     value_ids = st.write(value_line + '\n')
 
 st.write(ids)
-st.write(st.secrets["DB_USERNAME"] + "Hallo!")
 
 
 def api_call():
@@ -89,13 +88,13 @@ def api_call():
     payload = json.dumps({
         "attributes": [
             {
-                "objectTypeAttributeId": "375",
+                "objectTypeAttributeId": "375",  # objectTypeAttributeId des Feldes "Technikzuordnung"
                 "objectAttributeValues": [
                     ids
                 ]
             }
         ],
-        "objectTypeId": "27",
+        "objectTypeId": "27",    # objectTypeId von "Kisten"
     })
 
     response = requests.request(
@@ -107,6 +106,7 @@ def api_call():
     )
 
     st.write(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
+    st.info("Testinfo")
 
 
 st.button("Ausführen", on_click=api_call)
